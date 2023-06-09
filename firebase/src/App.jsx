@@ -1,8 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import './App.css'
 
 import { db } from './firebaseConnection'
-import { doc, setDoc, collection, addDoc, getDoc, getDocs, updateDoc, deleteDoc } from 'firebase/firestore'
+import {
+  doc,
+  setDoc,
+  collection
+  , addDoc,
+  getDoc,
+  getDocs,
+  updateDoc,
+  deleteDoc,
+  onSnapshot
+} from 'firebase/firestore'
 
 function App() {
 
@@ -11,6 +21,29 @@ function App() {
   const [idPost, setIdPost] = useState('')
 
   const [posts, setPosts] = useState([])
+
+  useEffect(() => {
+    async function loadPosts() {
+      const onsub = onSnapshot(collection(db, "posts"), (snapshot) => {
+        let listaPosts = []
+
+        snapshot.forEach((doc) => {
+          listaPosts.push({
+            id: doc.id,
+            titulo: doc.data().titulo,
+            autor: doc.data().autor
+          })
+        })
+
+        setPosts(listaPosts)
+
+      })
+        .catch((error) => {
+          console.log(error)
+        })
+    }
+    loadPosts()
+  }, [])
 
   async function handleAdd() {
     // await setDoc(doc(db, "posts", "12345"),{
@@ -74,30 +107,30 @@ function App() {
 
   }
 
-  async function editarPost(){
+  async function editarPost() {
     const docRef = doc(db, "posts", idPost)
 
-    await updateDoc(docRef,{
+    await updateDoc(docRef, {
       titulo: titulo,
       autor: autor
     })
-    .then(()=>{
-      setIdPost('')
-      setAutor('')
-      setTitulo('')
-    })
-    .catch((error)=>{
-      console.log(error)
-    })
+      .then(() => {
+        setIdPost('')
+        setAutor('')
+        setTitulo('')
+      })
+      .catch((error) => {
+        console.log(error)
+      })
   }
 
-  async function excluirPost(id){
+  async function excluirPost(id) {
     const docRef = doc(db, "posts", id)
 
     await deleteDoc(docRef)
-    .then(()=>{
-      alert("Post deletado com sucesso")
-    })
+      .then(() => {
+        alert("Post deletado com sucesso")
+      })
   }
 
   return (
@@ -106,10 +139,10 @@ function App() {
       <div className="container">
         <label>Id do Post</label>
         <input
-        type="text" 
-        placeholder="Digite o Id dio o post"
-        value={idPost}
-        onChange={(e)=> setIdPost(e.target.value)}
+          type="text"
+          placeholder="Digite o Id dio o post"
+          value={idPost}
+          onChange={(e) => setIdPost(e.target.value)}
         /> <br />
         <label>Titulo:</label>
         <textarea
@@ -136,7 +169,7 @@ function App() {
                 <strong>ID: {post.id}</strong> <br />
                 <span>Titulo: {post.titulo}</span> <br />
                 <span>Autor: {post.autor}</span> <br />
-                <button onClick={()=> excluirPost(post.id)} >Excluir</button> <br /><br />
+                <button onClick={() => excluirPost(post.id)} >Excluir</button> <br /><br />
               </li>
             )
           })}
