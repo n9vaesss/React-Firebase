@@ -22,6 +22,8 @@ function App() {
 
   const [posts, setPosts] = useState([])
 
+
+  //read
   useEffect(() => {
     async function loadPosts() {
       const onsub = onSnapshot(collection(db, "posts"), (snapshot) => {
@@ -45,6 +47,7 @@ function App() {
     loadPosts()
   }, [])
 
+  // write
   async function handleAdd() {
     // await setDoc(doc(db, "posts", "12345"),{
     //   titulo: titulo,
