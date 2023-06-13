@@ -1,4 +1,4 @@
-import {initializeApp} from 'firebase/app'
+import { initializeApp } from 'firebase/app'
 import { getFirestore } from 'firebase/firestore'
 
 const firebaseConfig = {
@@ -9,9 +9,10 @@ const firebaseConfig = {
     messagingSenderId: "172725761908",
     appId: "1:172725761908:web:46ff980ff6282cafb51e21",
     measurementId: "G-RN0F7ERJHL"
-  };
+};
 
-  const firebaseApp = initializeApp(firebaseConfig)
-  const db = getFirestore(firebaseApp)
+const firebaseApp = initializeApp(firebaseConfig)
 
-  export {db}
+const db = getFirestore(firebaseApp)
+
+export { db }
