@@ -1,0 +1,69 @@
+.main-container-login {
+    width: 98vw;
+    height: 98vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-container-login section {
+    margin: 0 auto;
+    text-align: center;
+}
+
+.main-container-login section h1 {
+    font-size: 25px;
+}
+
+.main-container-login section img {
+    width: 350px;
+}
+
+.main-container-login form {
+    max-width: 600px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    margin-top: 25px;
+}
+
+.main-container-login div {
+    display: flex;
+    flex-direction: column;
+}
+
+.main-container-login div label {
+    font-size: 20px;
+    width: 90%;
+    margin: auto;
+}
+
+.main-container-login div input {
+    max-width: 600px;
+    width: 90%;
+    margin: 10px auto;
+    padding: 10px;
+    font-size: 18px;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+.main-container-login button {
+    margin: 10px auto;
+    width: 200px;
+    font-size: 21px;
+    padding: 12px 12px 14px 12px;
+    border-radius: 10px;
+    border: none;
+    background-color: #00a189;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.main-container-login div .error-message{
+    width: 90%;
+    margin: auto;
+    color: red;
+    font-weight: bolder;
+}
