@@ -11,22 +11,24 @@ function Header() {
 
     const [buttonIncludeRegister, setButtonIncludeRegister] = useState(false)
     const [buttonHome, setButtonHome] = useState(false)
-    const [buttonADM, setButtonADM] = useState(true)
+    const [buttonADM, setButtonADM] = useState(false)
 
     const navigate = useNavigate()
 
     useEffect(() => {
         let url = window.location.href.split('/')
-        if (url[3] == 'home') {
+        if (url[3] === 'home') {
             setButtonIncludeRegister(true)
             setButtonHome(false)
-        } else if (url[3] == 'register') {
+        } else if (url[3] === 'register') {
             setButtonHome(true)
             setButtonIncludeRegister(false)
-        }else if (url[3] == 'painelAdm') {
+        } else if (url[3] === 'painelAdm') {
             setButtonHome(true)
             setButtonIncludeRegister(true)
-            setButtonADM(false)
+        } else if (url[3] === 'includeRegister') {
+            setButtonHome(true)
+            setButtonIncludeRegister(false)
         }
     }, [])
 

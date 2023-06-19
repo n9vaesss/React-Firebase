@@ -1,0 +1,107 @@
+.main-container-home button{
+    cursor: pointer;
+}
+
+.main-container-home section{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.main-container-home section table{
+    width: 70%;
+    margin-top: 50px;
+}
+
+.main-container-home section table thead tr{
+    color: white;
+}
+
+.main-container-home section table thead tr td{
+    background-color: #870a44;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.main-container-home section table thead tr td input{
+    width: 90%;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    padding: 5px;
+    font-size: 1.2rem;
+    border: none;
+}
+
+.main-container-home section table thead tr td input:focus{
+    outline: none;
+}
+
+.main-container-home section table thead tr td button{
+    width: 10%;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    padding: 5px;
+    font-size: 1.2rem;
+    border: none;
+}
+
+.main-container-home section table tbody .title-table td{
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.main-container-home section table tbody tr .edit-table button{
+    width: 50%;
+    border: none;
+    font-size: 1.2rem;
+    background-color: white;
+}
+
+.main-container-home section table tbody tr td{
+    padding: 10px 0 0 10px;
+}
+
+.main-container-home .text-center{
+    text-align: center;
+}
+
+.main-modal-delete{
+    width: 400px;
+    height: 150px;
+    background-color: white;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
+    margin-top: 20%;
+    margin-left: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.main-modal-delete span{
+    font-size: 1.3rem;
+}
+
+.main-modal-delete div{
+    margin-top: 10px;
+}
+
+.main-modal-delete div button{
+    border: none;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    color: white;
+}
+
+.green{
+    background-color: green;
+}
+
+.red{
+    background-color: red;
+}

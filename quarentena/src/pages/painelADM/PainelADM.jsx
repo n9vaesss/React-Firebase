@@ -4,7 +4,6 @@ function PainelADM() {
     return (
         <div>
             <Header/>
-            
         </div>  
     );
 }

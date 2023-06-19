@@ -10,6 +10,7 @@ import {
 import Home from './pages/home/Home'
 import Login from './pages/login/Login';
 import PainelADM from './pages/painelADM/PainelADM';
+import IncludeRegister from './pages/includeRegister/IncludeRegister';
 
 
 const router = createBrowserRouter([
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
   {
     path: '/painelAdm',
     element: <PainelADM/>
+  },
+  {
+    path: '/includeRegister',
+    element: <IncludeRegister/>
   }
 ]);
 
