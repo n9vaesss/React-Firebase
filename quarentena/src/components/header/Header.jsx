@@ -11,6 +11,7 @@ function Header() {
 
     const [buttonIncludeRegister, setButtonIncludeRegister] = useState(false)
     const [buttonHome, setButtonHome] = useState(false)
+    const [buttonADM, setButtonADM] = useState(true)
 
     const navigate = useNavigate()
 
@@ -22,6 +23,10 @@ function Header() {
         } else if (url[3] == 'register') {
             setButtonHome(true)
             setButtonIncludeRegister(false)
+        }else if (url[3] == 'painelAdm') {
+            setButtonHome(true)
+            setButtonIncludeRegister(true)
+            setButtonADM(false)
         }
     }, [])
 
@@ -38,6 +43,7 @@ function Header() {
             <img src={LogoLongo} />
             <div>
                 <nav>
+                    {buttonADM && <button onClick={() => goTo("/painelAdm")}>Painel administrativo</button>}
                     {buttonHome && <button onClick={() => goTo("/home")}>Todos registros</button>}
                     {buttonIncludeRegister && <button onClick={() => goTo("/includeRegister")} >Incluir novo registro</button>}
                     <button onClick={LogOut}>Sair</button>
