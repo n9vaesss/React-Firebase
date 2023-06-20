@@ -1,0 +1,42 @@
+.main-includeRegister {
+    width: 100%;
+    display: flex;
+}
+
+.main-includeRegister form {
+    margin: 100px auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-includeRegister .main-inputsForm label,
+.main-includeRegister label{
+    margin-bottom: 10px;
+    display: block;
+    font-size: 1.3em;
+    font-weight: bolder;
+}
+
+.main-includeRegister input,
+.main-includeRegister select{
+    margin-bottom: 10px;
+    width: 500px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid black;
+    font-size: 1.2em;
+}
+
+.main-includeRegister button{
+    width: 200px;
+    font-size: 1.2em;
+    padding: 15px 20px;
+    font-weight: bold;
+    border-radius: 10px;
+    background-color: #80d7bf;
+    color: white;
+    border: none;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.432);
+    margin: 30px auto;
+    cursor: pointer;
+}

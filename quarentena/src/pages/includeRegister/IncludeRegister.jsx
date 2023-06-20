@@ -1,7 +1,9 @@
 import { useState } from "react";
+import './IncludeRegister.css'
 
 import validationLogin from "../../js/validationLogin";
 import Header from "../../components/header/Header";
+import InputsForm from "../../components/inputsForm/InputsForm";
 
 import { addDoc, collection } from 'firebase/firestore'
 import { db } from '../../connection/firebaseConnection'
@@ -9,28 +11,21 @@ import { db } from '../../connection/firebaseConnection'
 function IncludeRegister() {
 
     const [localidade, setLocalidade] = useState('Loja 1')
-
     const [codBarras, setCodBarras] = useState('')
-
     const [nome, setNome] = useState('')
-
     const [dtValidade, setDtValidade] = useState('')
-
     const [comissao, setComissao] = useState('')
-
-    const onchangeLocalidade = e => {
-        setLocalidade(e.target.value);
-    };
+    const onchangeLocalidade = e => { setLocalidade(e.target.value) };
 
     async function handleRegisterProducts(e) {
         e.preventDefault()
 
         await addDoc(collection(db, "produtos"), {
-            comissao: comissao,
-            dtValidade: dtValidade,
-            localidade: localidade,
             nome: nome,
-            codBarras: codBarras
+            codBarras: codBarras,
+            localidade: localidade,
+            dtValidade: dtValidade,
+            comissao: comissao,
         })
             .then(() => {
                 alert('cadastrado')
@@ -46,35 +41,36 @@ function IncludeRegister() {
         setLocalidade("Loja 1")
     }
 
+    function handleSetResponseCb(response) {
+        if (response[1] === 'codBarras') { setCodBarras(response[0]) }
+        if (response[1] === 'nome') { setNome(response[0]) }
+        if (response[1] === 'dtValidade') { setDtValidade(response[0]) }
+        if (response[1] === 'comissao') { setComissao(response[0]) }
+    }
+
     validationLogin()
 
     return (
         <>
             <Header />
-            <main>
+            <main className="main-includeRegister">
                 <form>
-                    <div>
-                        <label>Codigo de barras: </label>
-                        <input
-                            type="text"
-                            placeholder="Insira o codido de barras"
-                            maxLength={45}
-                            value={codBarras}
-                            onChange={e => setCodBarras(e.target.value)}
-                            required 
-                        />
-                    </div>
-                    <div>
-                        <label>Nome do Produto: </label>
-                        <input
-                            type="text"
-                            placeholder="Insira o nome do produto"
-                            maxLength={45}
-                            value={nome}
-                            onChange={e => setNome(e.target.value)}
-                            required 
-                        />
-                    </div>
+                    <InputsForm
+                        name="Codigo de barras: "
+                        placeholder="Insira o codido de barras"
+                        maxL={45}
+                        handleSubmit={handleSetResponseCb}
+                        nameState="codBarras"
+                        type="text"
+                    />
+                    <InputsForm
+                        name="Nome do Produto: "
+                        placeholder="Insira o nome do produto"
+                        maxL={45}
+                        handleSubmit={handleSetResponseCb}
+                        nameState="nome"
+                        type="text"
+                    />
                     <div>
                         <label>Localidade: </label>
                         <select value={localidade} onChange={onchangeLocalidade}>
@@ -86,25 +82,22 @@ function IncludeRegister() {
                             <option value="Loja 6">Loja 6</option>
                         </select>
                     </div>
-                    <div>
-                        <label>Data de validade: </label>
-                        <input
-                            type="date"
-                            value={dtValidade}
-                            onChange={e => setDtValidade(e.target.value)}
-                            required 
-                        />
-                    </div>
-                    <div>
-                        <label>Comissão: </label>
-                        <input
-                            type="number"
-                            placeholder="Insira o valor da comissão"
-                            value={comissao}
-                            onChange={e => setComissao(e.target.value)}
-                            required 
-                        />
-                    </div>
+                    <InputsForm
+                        name="Data de validade: "
+                        placeholder=""
+                        maxL={45}
+                        handleSubmit={handleSetResponseCb}
+                        nameState="dtValidade"
+                        type="date"
+                    />
+                    <InputsForm
+                        name="Comissão: "
+                        placeholder="Insira o valor da comissão"
+                        maxL={5}
+                        handleSubmit={handleSetResponseCb}
+                        nameState="comissao"
+                        type="number"
+                    />
 
                     <button onClick={handleRegisterProducts}>Registrar</button>
                 </form>
