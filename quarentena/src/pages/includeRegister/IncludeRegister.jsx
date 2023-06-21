@@ -28,17 +28,18 @@ function IncludeRegister() {
             comissao: comissao,
         })
             .then(() => {
-                alert('cadastrado')
+                setCodBarras("")
+                setNome("")
+                setDtValidade("")
+                setComissao("")
+                setLocalidade("Loja 1")
+
+                alert('Item cadastrado com sucesso')
             })
             .catch((err) => {
                 console.log(err)
             })
 
-        setCodBarras("")
-        setNome("")
-        setDtValidade("")
-        setComissao("")
-        setLocalidade("Loja 1")
     }
 
     function handleSetResponseCb(response) {
@@ -54,7 +55,7 @@ function IncludeRegister() {
         <>
             <Header />
             <main className="main-includeRegister">
-                <form>
+                <div>
                     <InputsForm
                         name="Codigo de barras: "
                         placeholder="Insira o codido de barras"
@@ -100,7 +101,7 @@ function IncludeRegister() {
                     />
 
                     <button onClick={handleRegisterProducts}>Registrar</button>
-                </form>
+                </div>
             </main>
         </>
     );

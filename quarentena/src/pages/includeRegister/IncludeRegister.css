@@ -3,14 +3,14 @@
     display: flex;
 }
 
-.main-includeRegister form {
+.main-includeRegister>div {
     margin: 100px auto;
     display: flex;
     flex-direction: column;
 }
 
 .main-includeRegister .main-inputsForm label,
-.main-includeRegister label{
+.main-includeRegister label {
     margin-bottom: 10px;
     display: block;
     font-size: 1.3em;
@@ -18,7 +18,7 @@
 }
 
 .main-includeRegister input,
-.main-includeRegister select{
+.main-includeRegister select {
     margin-bottom: 10px;
     width: 500px;
     padding: 5px;
@@ -27,7 +27,7 @@
     font-size: 1.2em;
 }
 
-.main-includeRegister button{
+.main-includeRegister button {
     width: 200px;
     font-size: 1.2em;
     padding: 15px 20px;

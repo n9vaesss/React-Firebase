@@ -2,23 +2,36 @@ import React, { useEffect, useState } from 'react';
 import './TableProducts.css'
 
 
-import { db } from '../../connection/firebaseConnection'
+import { db, auth } from '../../connection/firebaseConnection'
 import {
     collection,
     onSnapshot,
     deleteDoc,
-    doc
+    doc,
+    setDoc,
+    getDoc
 } from 'firebase/firestore'
+
+import {
+    onAuthStateChanged
+} from 'firebase/auth'
 
 import Modal from 'react-modal';
 
-import { ImBin, ImPencil, ImSearch } from 'react-icons/im';
+import {
+    ImBin,
+    ImPencil,
+    ImSearch,
+    ImCheckmark
+} from 'react-icons/im';
+
 
 function TableProducts() {
 
     const [produtcs, setProducts] = useState([])
     const [productSelected, setProductSelected] = useState('')
     const [modalIsOpen, setModalIsOpen] = useState(false)
+    const [user, setUser] = useState('')
 
 
     useEffect(() => {
@@ -42,6 +55,16 @@ function TableProducts() {
         loadProducts()
     }, [])
 
+    useEffect(() => {
+        async function checkLogin() {
+            await onAuthStateChanged(auth, user => {
+                setUser(user.uid)
+            })
+        }
+
+        checkLogin()
+    }, [])
+
     function handleOpenModal(id) {
         setModalIsOpen(true)
         setProductSelected(id)
@@ -52,6 +75,9 @@ function TableProducts() {
     }
 
     async function handleDelete() {
+
+        await registarLogsExclusao()
+
         const docRef = doc(db, "produtos", productSelected)
 
         await deleteDoc(docRef)
@@ -63,6 +89,32 @@ function TableProducts() {
             .catch((err) => {
                 console.log(err)
             })
+    }
+
+    async function registarLogsExclusao() {
+
+        const docRef = doc(db, "produtos", productSelected)
+
+        await getDoc(docRef)
+            .then((snapshot) => {
+
+                const postRef = doc(db, "logsExclusao", productSelected)
+
+                setDoc(postRef, {
+                    dataEHora: new Date,  
+                    idUser: user,
+                    codBarras: snapshot.data().codBarras,
+                    nome: snapshot.data().nome,
+                    dtValidade: snapshot.data().dtValidade,
+                    comissao: snapshot.data().comissao
+                })
+
+            })
+
+    }
+
+    async function handleConfirmSale(id) {
+
     }
 
     return (
@@ -104,6 +156,7 @@ function TableProducts() {
                                 <td className="edit-table">
                                     <button onClick={() => handleOpenModal(prod.id)}><ImBin /></button>
                                     <button><ImPencil /></button>
+                                    <button onClick={() => handleConfirmSale(prod.id)}><ImCheckmark /></button>
                                 </td>
                             </tr>
                         )
