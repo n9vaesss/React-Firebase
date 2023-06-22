@@ -20,26 +20,29 @@ function IncludeRegister() {
     async function handleRegisterProducts(e) {
         e.preventDefault()
 
-        await addDoc(collection(db, "produtos"), {
-            nome: nome,
-            codBarras: codBarras,
-            localidade: localidade,
-            dtValidade: dtValidade,
-            comissao: comissao,
-        })
-            .then(() => {
-                setCodBarras("")
-                setNome("")
-                setDtValidade("")
-                setComissao("")
-                setLocalidade("Loja 1")
-
-                alert('Item cadastrado com sucesso')
+        if (codBarras.length && nome.length && dtValidade.length && comissao.length > 0) {
+            await addDoc(collection(db, "produtos"), {
+                nome: nome,
+                codBarras: codBarras,
+                localidade: localidade,
+                dtValidade: dtValidade,
+                comissao: comissao,
             })
-            .catch((err) => {
-                console.log(err)
-            })
+                .then(() => {
+                    setCodBarras("")
+                    setNome("")
+                    setDtValidade("")
+                    setComissao("")
+                    setLocalidade("Loja 1")
 
+                    alert('Item cadastrado com sucesso')
+                })
+                .catch((err) => {
+                    console.log(err)
+                })
+        } else {
+            alert("preencha todos os campos")
+        }
     }
 
     function handleSetResponseCb(response) {

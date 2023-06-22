@@ -66,7 +66,7 @@ function TableProducts() {
     }, [])
 
     function handleOpenModal(id) {
-        setModalIsOpen(true)
+        setModalIsOpen(true) 
         setProductSelected(id)
     }
 
@@ -101,7 +101,7 @@ function TableProducts() {
                 const postRef = doc(db, "logsExclusao", productSelected)
 
                 setDoc(postRef, {
-                    dataEHora: new Date,  
+                    dataEHora: new Date,
                     idUser: user,
                     codBarras: snapshot.data().codBarras,
                     nome: snapshot.data().nome,
@@ -114,6 +114,7 @@ function TableProducts() {
     }
 
     async function handleConfirmSale(id) {
+        setProductSelected(id)
 
     }
 
