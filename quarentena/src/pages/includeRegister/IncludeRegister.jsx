@@ -29,10 +29,10 @@ function IncludeRegister() {
                 comissao: comissao,
             })
                 .then(() => {
-                    setCodBarras("")
-                    setNome("")
-                    setDtValidade("")
-                    setComissao("")
+                    setCodBarras('')
+                    setNome('')
+                    setDtValidade('')
+                    setComissao('')
                     setLocalidade("Loja 1")
 
                     alert('Item cadastrado com sucesso')

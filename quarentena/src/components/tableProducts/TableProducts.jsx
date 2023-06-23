@@ -25,6 +25,8 @@ import {
     ImCheckmark
 } from 'react-icons/im';
 
+import Modal1 from '../modal/Modal';
+
 
 function TableProducts() {
 
@@ -32,6 +34,7 @@ function TableProducts() {
     const [productSelected, setProductSelected] = useState('')
     const [modalIsOpen, setModalIsOpen] = useState(false)
     const [user, setUser] = useState('')
+    const [openModalConfimSale, setOpenModalConfimSale] = useState(0)
 
 
     useEffect(() => {
@@ -66,7 +69,7 @@ function TableProducts() {
     }, [])
 
     function handleOpenModal(id) {
-        setModalIsOpen(true) 
+        setModalIsOpen(true)
         setProductSelected(id)
     }
 
@@ -113,9 +116,13 @@ function TableProducts() {
 
     }
 
-    async function handleConfirmSale(id) {
+    function handleConfirmSale(id) {
         setProductSelected(id)
+        setOpenModalConfimSale(1)
+    }
 
+    function handleSetPropsModal(response) {
+        setOpenModalConfimSale(response)
     }
 
     return (
@@ -164,6 +171,12 @@ function TableProducts() {
                     })}
                 </tbody>
             </table>
+
+            <Modal1
+                modal={openModalConfimSale}
+                handlePropsModal={handleSetPropsModal}
+                id={productSelected}
+            />
 
             <Modal
                 isOpen={modalIsOpen}
