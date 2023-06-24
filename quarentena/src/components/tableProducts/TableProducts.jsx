@@ -35,6 +35,8 @@ function TableProducts() {
     const [modalIsOpen, setModalIsOpen] = useState(false)
     const [user, setUser] = useState('')
     const [openModalConfimSale, setOpenModalConfimSale] = useState(0)
+    const [inputValueSearch, setInputValueSearch] = useState('')
+    const [productsSearch, setProductsSearch] = useState([])
 
 
     useEffect(() => {
@@ -104,7 +106,7 @@ function TableProducts() {
                 const postRef = doc(db, "logsExclusao", productSelected)
 
                 setDoc(postRef, {
-                    dataEHora: new Date,
+                    dataEHora: new Date(),
                     idUser: user,
                     codBarras: snapshot.data().codBarras,
                     nome: snapshot.data().nome,
@@ -125,6 +127,14 @@ function TableProducts() {
         setOpenModalConfimSale(response)
     }
 
+    function handleSearch(e) {
+        setInputValueSearch(e.target.value)
+
+        setProductsSearch(produtcs.filter(prod => prod.nome.includes(inputValueSearch)))
+        console.log(productsSearch)
+
+    }
+
     return (
         <section>
             <table>
@@ -135,9 +145,11 @@ function TableProducts() {
                         </td>
                         <td colSpan={3}>
                             <input
-                                type="text"
+                                type="search"
                                 placeholder="Nome/ Cod. Barras/ Dt. Validade"
                                 maxLength={45}
+                                value={inputValueSearch}
+                                onChange={handleSearch}
                             />
                             <button><ImSearch /></button>
                         </td>
@@ -153,7 +165,7 @@ function TableProducts() {
                         <td className="text-center">Editar</td>
                     </tr>
 
-                    {produtcs.map((prod) => {
+                    {!inputValueSearch && produtcs.map((prod) => {
                         return (
                             <tr key={prod.id}>
                                 <td>{prod.nome}</td>
@@ -169,6 +181,24 @@ function TableProducts() {
                             </tr>
                         )
                     })}
+
+                    {inputValueSearch && productsSearch.map((prod) => {
+                        return (
+                            <tr key={prod.id}>
+                                <td>{prod.nome}</td>
+                                <td colSpan={2}>{prod.codBarras}</td>
+                                <td className="text-center">{prod.localidade}</td>
+                                <td className="text-center">{prod.dtValidade}</td>
+                                <td className="text-center">{prod.comissao}%</td>
+                                <td className="edit-table">
+                                    <button onClick={() => handleOpenModal(prod.id)}><ImBin /></button>
+                                    <button><ImPencil /></button>
+                                    <button onClick={() => handleConfirmSale(prod.id)}><ImCheckmark /></button>
+                                </td>
+                            </tr>
+                        )
+                    })}
+
                 </tbody>
             </table>
 
@@ -176,6 +206,7 @@ function TableProducts() {
                 modal={openModalConfimSale}
                 handlePropsModal={handleSetPropsModal}
                 id={productSelected}
+                user={user}
             />
 
             <Modal

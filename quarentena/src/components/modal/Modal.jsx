@@ -12,6 +12,7 @@ function Modal(props) {
     const [dtValidade, setDtValidade] = useState('')
     const [codBarras, setCodBarras] = useState('')
     const [inputValue, setInputValue] = useState('')
+    const [comissao, setComissao] = useState('')
 
     useEffect(() => {
         if (props.modal === 0) {
@@ -28,6 +29,7 @@ function Modal(props) {
                         setNome(snapshot.data().nome)
                         setDtValidade(snapshot.data().dtValidade)
                         setCodBarras(snapshot.data().codBarras)
+                        setComissao(snapshot.data().comissao)
                     })
             }
 
@@ -41,22 +43,27 @@ function Modal(props) {
 
     async function handleConfirmSale() {
 
-        handleDelet()
-
-        await setDoc(doc(db, 'logsVendasConfirmadas', props.id), {
-            nome: nome,
-            dtValidade: dtValidade,
-            codBarras: codBarras,
-            nomeDoVendedor: inputValue
-        })
-            .then(() => {
-                alert("Venda confirmada")
-                setNome('')
-                setDisplay('none')
+        if (inputValue.length < 2) {
+            alert('preencha o nome do vendedor!')
+        } else {
+            await setDoc(doc(db, 'logsVendasConfirmadas', props.id), {
+                nome: nome,
+                dtValidade: dtValidade,
+                codBarras: codBarras,
+                nomeDoVendedor: inputValue,
+                usuarioLogado: props.user,
+                comissao: comissao,
+                dtConfirmacao: new Date()
             })
-            .catch((err) => {
-                console.log(err)
-            })
+                .then(() => {
+                    setNome('')
+                    setDisplay('none')
+                    handleDelet()
+                })
+                .catch((err) => {
+                    console.log(err)
+                })
+        }
     }
 
     async function handleDelet() {
@@ -64,7 +71,7 @@ function Modal(props) {
 
         await deleteDoc(docRef)
             .then(() => {
-                console.log('Produto deletado')
+                alert("Venda confirmada")
             })
             .catch((err) => {
                 console.log(err)

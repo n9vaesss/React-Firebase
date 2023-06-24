@@ -42,7 +42,7 @@ function Header() {
 
     return (
         <header>
-            <img src={LogoLongo} />
+            <img src={LogoLongo} alt='Logo'/>
             <div>
                 <nav>
                     {buttonADM && <button onClick={() => goTo("/painelAdm")}>Painel administrativo</button>}

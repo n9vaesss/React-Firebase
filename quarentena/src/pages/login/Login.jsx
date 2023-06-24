@@ -70,7 +70,7 @@ function Login() {
     return (
         <main className="main-container-login">
             <section>
-                <img src={Logo} />
+                <img src={Logo} alt="Logo" />
                 <h1>Sistema de controle quarentena</h1>
             </section>
             <form>
