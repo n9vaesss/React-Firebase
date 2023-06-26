@@ -8,6 +8,8 @@ import InputsForm from "../../components/inputsForm/InputsForm";
 import { addDoc, collection } from 'firebase/firestore'
 import { db } from '../../connection/firebaseConnection'
 
+import { useNavigate } from 'react-router-dom'
+
 function IncludeRegister() {
 
     const [localidade, setLocalidade] = useState('Loja 1')
@@ -16,6 +18,8 @@ function IncludeRegister() {
     const [dtValidade, setDtValidade] = useState('')
     const [comissao, setComissao] = useState('')
     const onchangeLocalidade = e => { setLocalidade(e.target.value) };
+
+    const navigate = useNavigate()
 
     async function handleRegisterProducts(e) {
         e.preventDefault()
@@ -36,6 +40,8 @@ function IncludeRegister() {
                     setLocalidade("Loja 1")
 
                     alert('Item cadastrado com sucesso')
+
+                    navigate('/home')
                 })
                 .catch((err) => {
                     console.log(err)
