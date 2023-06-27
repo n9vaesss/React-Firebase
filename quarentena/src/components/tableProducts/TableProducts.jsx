@@ -74,6 +74,14 @@ function TableProducts() {
         checkLogin()
     }, [])
 
+    useEffect(() => {
+        let a = Math.max()
+        let b = Math.min()
+        console.log(a)
+        console.log(b )
+
+    }, [])
+
     function handleOpenModal(id) {
         setModalIsOpen(true)
         setProductSelected(id)
@@ -135,8 +143,6 @@ function TableProducts() {
         setInputValueSearch(e.target.value)
 
         setProductsSearch(produtcs.filter(prod => prod.nome.includes(inputValueSearch)))
-        console.log(productsSearch)
-
     }
 
     return (
