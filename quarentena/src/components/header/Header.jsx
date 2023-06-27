@@ -3,6 +3,9 @@ import './Header.css'
 
 import { signOut } from 'firebase/auth'
 import { auth } from '../../connection/firebaseConnection';
+import {
+    onAuthStateChanged
+} from 'firebase/auth';
 
 import LogoLongo from '../../images/logo-drogarema-longo.png'
 import { useNavigate } from 'react-router-dom';
@@ -32,6 +35,18 @@ function Header() {
         }
     }, [])
 
+    useEffect(() => {
+        async function checkLogin() {
+            await onAuthStateChanged(auth, user => {
+                if (user.uid === '57k5ugtZm0SMFEoEsWRVuFac1h23') {
+                    setButtonADM(true)
+                }
+            })
+        }
+
+        checkLogin()
+    }, [])
+
     function goTo(pathing) {
         navigate(pathing)
     }
@@ -42,7 +57,7 @@ function Header() {
 
     return (
         <header>
-            <img src={LogoLongo} alt='Logo'/>
+            <img src={LogoLongo} alt='Logo' />
             <div>
                 <nav>
                     {buttonADM && <button onClick={() => goTo("/painelAdm")}>Painel administrativo</button>}

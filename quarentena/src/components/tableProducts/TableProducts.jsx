@@ -65,21 +65,13 @@ function TableProducts() {
         async function checkLogin() {
             await onAuthStateChanged(auth, user => {
                 setUser(user.uid)
-                if (user.uid == '57k5ugtZm0SMFEoEsWRVuFac1h23') {
+                if (user.uid === '57k5ugtZm0SMFEoEsWRVuFac1h23') {
                     setButtonEdit(true)
                 }
             })
         }
 
         checkLogin()
-    }, [])
-
-    useEffect(() => {
-        let a = Math.max()
-        let b = Math.min()
-        console.log(a)
-        console.log(b )
-
     }, [])
 
     function handleOpenModal(id) {
@@ -156,7 +148,7 @@ function TableProducts() {
                         <td colSpan={3}>
                             <input
                                 type="search"
-                                placeholder="Nome/ Cod. Barras/ Dt. Validade"
+                                placeholder="Nome do produto"
                                 maxLength={45}
                                 value={inputValueSearch}
                                 onChange={handleSearch}

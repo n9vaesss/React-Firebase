@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import './IncludeRegister.css'
 
 import validationLogin from "../../js/validationLogin";
@@ -16,7 +16,6 @@ function IncludeRegister() {
     const [codBarras, setCodBarras] = useState('')
     const [nome, setNome] = useState('')
     const [dtValidade, setDtValidade] = useState('')
-    const [comissao, setComissao] = useState('')
     const onchangeLocalidade = e => { setLocalidade(e.target.value) };
 
     const navigate = useNavigate()
@@ -24,19 +23,31 @@ function IncludeRegister() {
     async function handleRegisterProducts(e) {
         e.preventDefault()
 
-        if (codBarras.length && nome.length && dtValidade.length && comissao.length > 0) {
+        const diffInMs = new Date() - new Date(dtValidade)
+        const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
+        let comissao = ''
+
+        if (diffInDays >= 120) {
+            comissao = 5
+        } else if (diffInDays < 120 && diffInDays >= 60) {
+            comissao = 7.5
+        } else if (diffInDays < 60) {
+            comissao = 10
+        }
+
+        if (codBarras.length && nome.length && dtValidade.length) {
+
             await addDoc(collection(db, "produtos"), {
                 nome: nome,
                 codBarras: codBarras,
                 localidade: localidade,
                 dtValidade: dtValidade,
-                comissao: comissao,
+                comissao: comissao
             })
                 .then(() => {
                     setCodBarras('')
                     setNome('')
                     setDtValidade('')
-                    setComissao('')
                     setLocalidade("Loja 1")
 
                     alert('Item cadastrado com sucesso')
@@ -55,10 +66,14 @@ function IncludeRegister() {
         if (response[1] === 'codBarras') { setCodBarras(response[0]) }
         if (response[1] === 'nome') { setNome(response[0]) }
         if (response[1] === 'dtValidade') { setDtValidade(response[0]) }
-        if (response[1] === 'comissao') { setComissao(response[0]) }
     }
 
     validationLogin()
+
+
+    useEffect(() => {
+
+    }, [])
 
     return (
         <>
@@ -99,14 +114,6 @@ function IncludeRegister() {
                         handleSubmit={handleSetResponseCb}
                         nameState="dtValidade"
                         type="date"
-                    />
-                    <InputsForm
-                        name="Comissão: "
-                        placeholder="Insira o valor da comissão"
-                        maxL={5}
-                        handleSubmit={handleSetResponseCb}
-                        nameState="comissao"
-                        type="number"
                     />
 
                     <button onClick={handleRegisterProducts}>Registrar</button>
