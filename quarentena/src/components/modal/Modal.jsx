@@ -12,6 +12,7 @@ function Modal(props) {
     const [dtValidade, setDtValidade] = useState('')
     const [codBarras, setCodBarras] = useState('')
     const [inputValue, setInputValue] = useState('')
+    const [inputValue1, setInputValue1] = useState('')
     const [comissao, setComissao] = useState('')
 
     useEffect(() => {
@@ -53,6 +54,7 @@ function Modal(props) {
                 nomeDoVendedor: inputValue,
                 usuarioLogado: props.user,
                 comissao: comissao,
+                valorVenda: inputValue1,
                 dtConfirmacao: new Date()
             })
                 .then(() => {
@@ -95,6 +97,13 @@ function Modal(props) {
                     maxLength={45}
                     value={inputValue}
                     onChange={e => setInputValue(e.target.value)}
+                />
+                <input
+                    type="text"
+                    placeholder='Insira o valor da venda'
+                    maxLength={45}
+                    value={inputValue1}
+                    onChange={e => setInputValue1(e.target.value)}
                 />
                 <button className='confirm-sale' onClick={handleConfirmSale}>Confirmar venda</button>
             </section>
