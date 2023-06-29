@@ -37,7 +37,6 @@ function TableProducts() {
     const [openModalConfimSale, setOpenModalConfimSale] = useState(0)
     const [inputValueSearch, setInputValueSearch] = useState('')
     const [productsSearch, setProductsSearch] = useState([])
-    const [buttonEdit, setButtonEdit] = useState(false)
 
 
     useEffect(() => {
@@ -66,7 +65,6 @@ function TableProducts() {
             await onAuthStateChanged(auth, user => {
                 setUser(user.uid)
                 if (user.uid === '57k5ugtZm0SMFEoEsWRVuFac1h23') {
-                    setButtonEdit(true)
                 }
             })
         }
@@ -177,7 +175,6 @@ function TableProducts() {
                                 <td className="text-center">{prod.comissao}%</td>
                                 <td className="edit-table">
                                     <button onClick={() => handleOpenModal(prod.id)}><ImBin /></button>
-                                    {buttonEdit && <button><ImPencil /></button>}
                                     <button onClick={() => handleConfirmSale(prod.id)}><ImCheckmark /></button>
                                 </td>
                             </tr>
@@ -194,7 +191,6 @@ function TableProducts() {
                                 <td className="text-center">{prod.comissao}%</td>
                                 <td className="edit-table">
                                     <button onClick={() => handleOpenModal(prod.id)}><ImBin /></button>
-                                    {buttonEdit && <button><ImPencil /></button>}
                                     <button onClick={() => handleConfirmSale(prod.id)}><ImCheckmark /></button>
                                 </td>
                             </tr>
