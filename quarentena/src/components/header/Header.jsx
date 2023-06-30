@@ -19,23 +19,6 @@ function Header() {
     const navigate = useNavigate()
 
     useEffect(() => {
-        let url = window.location.href.split('/')
-        if (url[3] === 'home') {
-            setButtonIncludeRegister(true)
-            setButtonHome(false)
-        } else if (url[3] === 'register') {
-            setButtonHome(true)
-            setButtonIncludeRegister(false)
-        } else if (url[3] === 'painelAdm') {
-            setButtonHome(true)
-            setButtonIncludeRegister(true)
-        } else if (url[3] === 'includeRegister') {
-            setButtonHome(true)
-            setButtonIncludeRegister(false)
-        }
-    }, [])
-
-    useEffect(() => {
         async function checkLogin() {
             await onAuthStateChanged(auth, user => {
                 if (user.uid === '57k5ugtZm0SMFEoEsWRVuFac1h23') {
@@ -61,8 +44,8 @@ function Header() {
             <div>
                 <nav>
                     {buttonADM && <button onClick={() => goTo("/painelAdm")}>Painel administrativo</button>}
-                    {buttonHome && <button onClick={() => goTo("/home")}>Todos registros</button>}
-                    {buttonIncludeRegister && <button onClick={() => goTo("/includeRegister")} >Incluir novo registro</button>}
+                    <button onClick={() => goTo("/home")}>Todos registros</button>
+                    <button onClick={() => goTo("/includeRegister")} >Incluir novo registro</button>
                     <button onClick={LogOut}>Sair</button>
                 </nav>
             </div>

@@ -1,16 +1,16 @@
-.main-painel{
+.main-painel {
     width: 100%;
     display: flex;
     flex-direction: column;
 }
 
-.main-painel div{
+.main-painel>div {
     margin: 50px auto;
     display: flex;
     flex-direction: column;
 }
 
-.main-painel div> button{
+.main-painel div>button {
     width: 500px;
     margin-bottom: 20px;
     border: none;
@@ -22,4 +22,78 @@
     background-color: #870A44;
     margin-left: 20px;
     cursor: pointer;
+}
+
+.main-painel .text-center {
+    text-align: center;
+}
+
+.main-painel h2 {
+    width: 100%;
+    text-align: center;
+}
+
+.main-painel table {
+    width: 70%;
+    margin: 50px auto;
+}
+
+.main-painel table thead tr td input:focus {
+    outline: none;
+}
+
+
+.main-painel table thead .title-table td {
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.main-painel table button {
+    width: 100%;
+    border: none;
+    text-align: center;
+    font-size: 1.2rem;
+    background-color: green;
+    color: white;
+    padding: 3px 4px;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.main-painel table tbody tr td {
+    padding: 10px 0 0 10px;
+}
+
+@media print {
+    .main-painel>div {
+        margin: 15px auto;
+    }
+
+    .main-painel div>button {
+        display: none;
+    }
+
+    .main-painel table {
+        width: 90%;
+        margin: 50px auto;
+    }
+
+    .main-painel table thead .title-table td {
+        font-weight: bold;
+        font-size: 0.8rem;
+    }
+
+    .conferir {
+        display: none;
+    }
+
+    .main-painel table tbody tr:nth-child(even) {
+        -webkit-print-color-adjust: exact;
+        background: #CCC
+    }
+
+    .main-painel table tbody tr:nth-child(odd) {
+        -webkit-print-color-adjust: exact;
+        background: #FFF
+    }
 }

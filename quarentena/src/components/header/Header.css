@@ -26,3 +26,8 @@ header div nav button{
 header img{
     padding-bottom: 20px;
 }
+@media print {
+    header{
+        display: none;
+    }
+}

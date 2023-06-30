@@ -27,13 +27,14 @@ function IncludeRegister() {
         const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
         let comissao = ''
 
-        if (diffInDays >= 120) {
+        if (diffInDays >= -120) {
             comissao = 5
-        } else if (diffInDays < 120 && diffInDays >= 60) {
+        } else if (diffInDays < -120 && diffInDays >= -60) {
             comissao = 7.5
-        } else if (diffInDays < 60) {
+        } else if (diffInDays < -60) {
             comissao = 10
         }
+
 
         if (codBarras.length && nome.length && dtValidade.length) {
 
