@@ -20,6 +20,23 @@ function IncludeRegister() {
 
     const navigate = useNavigate()
 
+    useEffect(()=>{
+        const diffInMs = new Date() - new Date('2023-10-04')
+        const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
+        let comissao = ''
+
+        if (diffInDays <= -120) {
+            comissao = 5
+            console.log(5)
+        } else if (diffInDays > -120 && diffInDays <= -60) {
+            comissao = 7.5
+            console.log(7.5)
+        } else if (diffInDays > -60) {
+            console.log(10)
+            comissao = 10
+        }
+    },[])
+
     async function handleRegisterProducts(e) {
         e.preventDefault()
 
@@ -27,11 +44,14 @@ function IncludeRegister() {
         const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
         let comissao = ''
 
-        if (diffInDays >= -120) {
+        if (diffInDays <= -120) {
             comissao = 5
-        } else if (diffInDays < -120 && diffInDays >= -60) {
+            console.log(5)
+        } else if (diffInDays > -120 && diffInDays <= -60) {
             comissao = 7.5
-        } else if (diffInDays < -60) {
+            console.log(7.5)
+        } else if (diffInDays > -60) {
+            console.log(10)
             comissao = 10
         }
 

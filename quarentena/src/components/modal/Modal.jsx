@@ -55,6 +55,7 @@ function Modal(props) {
                 usuarioLogado: props.user,
                 comissao: comissao,
                 valorVenda: inputValue1,
+                confirmado: 0,
                 dtConfirmacao: new Date()
             })
                 .then(() => {
